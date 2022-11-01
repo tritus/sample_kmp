@@ -1,25 +1,19 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
-    kotlin("multiplatform") version "1.7.0"
+    kotlin("multiplatform").version("1.7.0")
+    id("com.android.library").version("7.2.0")
 }
 
 repositories {
     mavenCentral()
+    google()
+    jcenter()
 }
 
 val iOSLibName = "MobileCommon"
 
 kotlin {
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-        withJava()
-        testRuns["test"].executionTask.configure {
-            useJUnitPlatform()
-        }
-    }
     // We don't build for iOS in case we are not on Mac OS
     if (System.getProperty("os.name") == "Mac OS X") {
         val xcFramework = XCFramework(iOSLibName)
@@ -46,8 +40,6 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val jvmMain by getting
-        val jvmTest by getting
         val iosMain by getting
         val iosTest by getting
         val iosSimulatorArm64Main by getting
@@ -57,4 +49,19 @@ kotlin {
         iosSimulatorArm64Main.dependsOn(iosMain)
         iosSimulatorArm64Test.dependsOn(iosTest)
     }
+}
+
+android {
+    compileSdk = 32
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 32
+    }
+}
+
+tasks.create("makeLibs") {
+    dependsOn(":assemble${iOSLibName}XCFramework")
+    dependsOn(":bundleReleaseAar")
+    dependsOn(":bundleDebugAar")
 }
