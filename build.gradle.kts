@@ -12,8 +12,7 @@ repositories {
     jcenter()
 }
 
-group = "com.electra.mobile"
-version = "0.1"
+group = "com.github.tritus"
 val iOSLibName = "MobileCommon"
 
 kotlin {
@@ -75,7 +74,7 @@ tasks.create("publishLibs") {
 publishing {
     publications {
         named<MavenPublication>("kotlinMultiplatform") {
-            artifactId = "common"
+            artifactId = "mobile_common"
         }
     }
     repositories {
