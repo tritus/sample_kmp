@@ -1,7 +1,7 @@
 {
   "formatVersion": "1.1",
   "component": {
-    "group": "com.electra.common",
+    "group": "com.electra.mobile",
     "module": "common",
     "version": "0.1",
     "attributes": {
@@ -53,7 +53,7 @@
       },
       "available-at": {
         "url": "../../electra-app-mobile-iosarm64/0.1/electra-app-mobile-iosarm64-0.1.module",
-        "group": "com.electra.common",
+        "group": "com.electra.mobile",
         "module": "electra-app-mobile-iosarm64",
         "version": "0.1"
       }
@@ -69,7 +69,7 @@
       },
       "available-at": {
         "url": "../../electra-app-mobile-iosarm64/0.1/electra-app-mobile-iosarm64-0.1.module",
-        "group": "com.electra.common",
+        "group": "com.electra.mobile",
         "module": "electra-app-mobile-iosarm64",
         "version": "0.1"
       }
@@ -85,7 +85,7 @@
       },
       "available-at": {
         "url": "../../electra-app-mobile-iossimulatorarm64/0.1/electra-app-mobile-iossimulatorarm64-0.1.module",
-        "group": "com.electra.common",
+        "group": "com.electra.mobile",
         "module": "electra-app-mobile-iossimulatorarm64",
         "version": "0.1"
       }
@@ -101,7 +101,7 @@
       },
       "available-at": {
         "url": "../../electra-app-mobile-iossimulatorarm64/0.1/electra-app-mobile-iossimulatorarm64-0.1.module",
-        "group": "com.electra.common",
+        "group": "com.electra.mobile",
         "module": "electra-app-mobile-iossimulatorarm64",
         "version": "0.1"
       }
@@ -117,7 +117,7 @@
       },
       "available-at": {
         "url": "../../electra-app-mobile-iosx64/0.1/electra-app-mobile-iosx64-0.1.module",
-        "group": "com.electra.common",
+        "group": "com.electra.mobile",
         "module": "electra-app-mobile-iosx64",
         "version": "0.1"
       }
@@ -133,7 +133,7 @@
       },
       "available-at": {
         "url": "../../electra-app-mobile-iosx64/0.1/electra-app-mobile-iosx64-0.1.module",
-        "group": "com.electra.common",
+        "group": "com.electra.mobile",
         "module": "electra-app-mobile-iosx64",
         "version": "0.1"
       }

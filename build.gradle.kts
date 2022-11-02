@@ -12,7 +12,7 @@ repositories {
     jcenter()
 }
 
-group = "com.electra.common"
+group = "com.electra.mobile"
 version = "0.1"
 val iOSLibName = "MobileCommon"
 
