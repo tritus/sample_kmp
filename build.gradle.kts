@@ -46,14 +46,18 @@ kotlin {
         }
         val androidMain by getting
         val androidTest by getting
-        val iosMain by getting
-        val iosTest by getting
-        val iosSimulatorArm64Main by getting
-        val iosSimulatorArm64Test by getting
 
-        // Set up dependencies between the source sets
-        iosSimulatorArm64Main.dependsOn(iosMain)
-        iosSimulatorArm64Test.dependsOn(iosTest)
+        if (System.getProperty("os.name") == "Mac OS X") {
+            val iosMain by getting
+            val iosTest by getting
+            val iosSimulatorArm64Main by getting
+            val iosSimulatorArm64Test by getting
+
+
+            // Set up dependencies between the source sets
+            iosSimulatorArm64Main.dependsOn(iosMain)
+            iosSimulatorArm64Test.dependsOn(iosTest)
+        }
     }
 }
 
