@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
-    kotlin("multiplatform").version("1.7.0")
+    kotlin("multiplatform").version("1.7.20")
     id("com.android.library").version("7.2.0")
+    id("maven-publish")
 }
 
 repositories {
@@ -11,6 +12,8 @@ repositories {
     jcenter()
 }
 
+group = "com.electra"
+version = "0.1"
 val iOSLibName = "MobileCommon"
 
 kotlin {
@@ -33,6 +36,8 @@ kotlin {
         }
     }
 
+    android()
+
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
@@ -40,6 +45,8 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+        val androidMain by getting
+        val androidTest by getting
         val iosMain by getting
         val iosTest by getting
         val iosSimulatorArm64Main by getting
@@ -60,8 +67,20 @@ android {
     }
 }
 
-tasks.create("makeLibs") {
+tasks.create("publishLibs") {
     dependsOn(":assemble${iOSLibName}XCFramework")
-    dependsOn(":bundleReleaseAar")
-    dependsOn(":bundleDebugAar")
+    dependsOn(":publishKotlinMultiplatformPublicationToMavenRepository")
+}
+
+publishing {
+    publications {
+        named<MavenPublication>("kotlinMultiplatform") {
+            artifactId = "mobile_common"
+        }
+    }
+    repositories {
+        maven {
+            url = uri(rootDir.absolutePath + "/mavenRepo")
+        }
+    }
 }

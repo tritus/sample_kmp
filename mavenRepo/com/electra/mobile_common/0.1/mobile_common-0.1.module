@@ -1,0 +1,142 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.electra",
+    "module": "mobile_common",
+    "version": "0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.7.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "electra-app-mobile-metadata-0.1.jar",
+          "url": "mobile_common-0.1.jar",
+          "size": 3324,
+          "sha512": "166cfcaad79e430d9a464f6cad9745c4126ed9f9b02b20238ddbbcdd73400df5d99f64a118a53252a63aa7d6a92895ffd6ce7f1d252976444f702a5c1a4a8b63",
+          "sha256": "cf385d2ab8ddf0b74b8dfd0c55d396666368db56a64f45c2a277d0669f921b64",
+          "sha1": "2f7aa8f4d0f9e40a6e8964664f110138db156d61",
+          "md5": "2cbe5f20e8c65f559106e8784fdb791e"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../electra-app-mobile-iosarm64/0.1/electra-app-mobile-iosarm64-0.1.module",
+        "group": "com.electra",
+        "module": "electra-app-mobile-iosarm64",
+        "version": "0.1"
+      }
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../electra-app-mobile-iosarm64/0.1/electra-app-mobile-iosarm64-0.1.module",
+        "group": "com.electra",
+        "module": "electra-app-mobile-iosarm64",
+        "version": "0.1"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../electra-app-mobile-iossimulatorarm64/0.1/electra-app-mobile-iossimulatorarm64-0.1.module",
+        "group": "com.electra",
+        "module": "electra-app-mobile-iossimulatorarm64",
+        "version": "0.1"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../electra-app-mobile-iossimulatorarm64/0.1/electra-app-mobile-iossimulatorarm64-0.1.module",
+        "group": "com.electra",
+        "module": "electra-app-mobile-iossimulatorarm64",
+        "version": "0.1"
+      }
+    },
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../electra-app-mobile-iosx64/0.1/electra-app-mobile-iosx64-0.1.module",
+        "group": "com.electra",
+        "module": "electra-app-mobile-iosx64",
+        "version": "0.1"
+      }
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../electra-app-mobile-iosx64/0.1/electra-app-mobile-iosx64-0.1.module",
+        "group": "com.electra",
+        "module": "electra-app-mobile-iosx64",
+        "version": "0.1"
+      }
+    }
+  ]
+}
