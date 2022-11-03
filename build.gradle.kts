@@ -48,8 +48,9 @@ kotlin {
 
 tasks.create<Zip>("zipIOSFramework") {
     dependsOn(":assembleMobileCommonXCFramework")
-    from(layout.buildDirectory.file("XCFrameworks/release/"))
+    from(layout.buildDirectory.dir("XCFrameworks/release"))
     include("MobileCommon.xcframework")
+    include("MobileCommon.xcframework/**/*")
     archiveFileName.set("MobileCommon.zip")
     destinationDirectory.set(layout.buildDirectory.dir("XCFrameworks"))
 }
