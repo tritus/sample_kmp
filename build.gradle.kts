@@ -41,14 +41,3 @@ kotlin {
         val commonTest by getting
     }
 }
-
-tasks.create<Delete>("cleanIOSFramework") {
-    dependsOn(":assembleMobileCommonXCFramework")
-    delete(layout.projectDirectory.dir("MobileCommon.xcframework"))
-}
-
-tasks.create<Copy>("moveIOSFramework") {
-    dependsOn(":cleanIOSFramework")
-    from(layout.buildDirectory.file("XCFrameworks/release"))
-    into(layout.projectDirectory)
-}
