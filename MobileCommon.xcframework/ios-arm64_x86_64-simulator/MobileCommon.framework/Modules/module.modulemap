@@ -1,0 +1,6 @@
+framework module MobileCommon {
+    umbrella header "MobileCommon.h"
+
+    export *
+    module * { export * }
+}

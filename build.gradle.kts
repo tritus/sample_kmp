@@ -42,10 +42,13 @@ kotlin {
     }
 }
 
-tasks.create<Zip>("iosZip") {
+tasks.create<Delete>("cleanIOSFramework") {
     dependsOn(":assembleMobileCommonXCFramework")
-    from(rootDir.path + "/build/XCFrameworks/release/")
-    include("MobileCommon.xcframework")
-    archiveFileName.set("$iOSLibName.zip")
-    destinationDirectory.set(rootDir)
+    delete(layout.projectDirectory.dir("MobileCommon.xcframework"))
+}
+
+tasks.create<Copy>("moveIOSFramework") {
+    dependsOn(":cleanIOSFramework")
+    from(layout.buildDirectory.file("XCFrameworks/release"))
+    into(layout.projectDirectory)
 }
