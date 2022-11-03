@@ -41,3 +41,11 @@ kotlin {
         val commonTest by getting
     }
 }
+
+tasks.create<Zip>("iosZip") {
+    dependsOn(":assembleMobileCommonXCFramework")
+    from(rootDir.path + "/build/XCFrameworks/release/")
+    include("MobileCommon.xcframework")
+    archiveFileName.set("$iOSLibName.zip")
+    destinationDirectory.set(rootDir)
+}
