@@ -1,0 +1,5 @@
+mutation CancelCapacityUsage($input: CancelCapacityUsageInput!) {
+  cancelCapacityUsage(input: $input) {
+    errors
+  }
+}

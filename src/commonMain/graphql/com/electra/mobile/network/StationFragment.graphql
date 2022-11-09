@@ -1,0 +1,33 @@
+fragment station on Station {
+  id
+  address
+  comingSoonLabel
+  latitude
+  longitude
+  name
+  parkingTypeLabel
+  publicAvailablePower
+  spotsCount
+  spotsFragment: spots {
+    ...spot
+  }
+  cards {
+    ...CardFragment
+  }
+}
+
+fragment spot on Spot {
+  id
+  connectorsFragment: connectors {
+    ...connector
+  }
+  publicAvailability
+  publicLabel
+  reducedMobility
+}
+
+fragment connector on Connector {
+  id
+  publicStatus
+  plug
+}

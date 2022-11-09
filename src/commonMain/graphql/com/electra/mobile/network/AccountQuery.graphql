@@ -1,0 +1,23 @@
+query AccountQuery($accountId: ID!) {
+  me {
+    account(id: $accountId) {
+      ...account
+    }
+  }
+}
+
+query FallbackAccountQuery {
+  me {
+    fallbackAccount {
+      ...account
+    }
+  }
+}
+
+fragment account on Account {
+  id
+  label
+  accountUser {
+    id
+  }
+}

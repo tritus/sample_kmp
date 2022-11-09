@@ -1,0 +1,11 @@
+query AccountsScreenOpQuery {
+  me {
+    accounts {
+      nodes {
+        id
+        label
+        pro
+      }
+    }
+  }
+}

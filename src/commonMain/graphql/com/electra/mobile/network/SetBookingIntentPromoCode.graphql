@@ -1,0 +1,8 @@
+mutation SetBookingIntentPromoCode($input: SetBookingIntentPromoCodeInput!) {
+  setBookingIntentPromoCode(input: $input) {
+    bookingIntent {
+      ...bookingIntentFragment
+    }
+    errors
+  }
+}

@@ -1,0 +1,18 @@
+mutation SignUpForm($input: SignUpInput!) {
+  signUp(input: $input) {
+    sessionToken
+    user {
+      id
+      firstname
+      lastname
+      phoneNumber
+      fallbackAccount {
+        id
+        fallbackCar {
+          id
+        }
+      }
+    }
+    errors
+  }
+}

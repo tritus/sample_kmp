@@ -1,0 +1,8 @@
+mutation CreateCapacityUsage($input: CreateCapacityUsageInput!) {
+  createCapacityUsage(input: $input) {
+    capacityUsage {
+      id
+    }
+    errors
+  }
+}

@@ -1,0 +1,18 @@
+mutation SignInForm($input: SignInInput!) {
+  signIn(input: $input) {
+    sessionToken
+    user {
+      id
+      firstname
+      lastname
+      phoneNumber
+      fallbackAccount {
+        id
+        fallbackCar {
+          id
+        }
+      }
+    }
+    errors
+  }
+}

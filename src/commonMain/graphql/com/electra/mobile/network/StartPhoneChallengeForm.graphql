@@ -1,0 +1,6 @@
+mutation StartPhoneChallengeForm($input: StartPhoneChallengeInput!) {
+  startPhoneChallenge(input: $input) {
+    challengeToken
+    errors
+  }
+}

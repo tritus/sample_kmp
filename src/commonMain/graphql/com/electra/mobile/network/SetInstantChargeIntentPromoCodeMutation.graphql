@@ -1,0 +1,10 @@
+mutation SetInstantChargeIntentPromoCode(
+  $input: SetInstantChargeIntentPromoCodeInput!
+) {
+  setInstantChargeIntentPromoCode(input: $input) {
+    instantChargeIntent {
+      id
+    }
+    errors
+  }
+}

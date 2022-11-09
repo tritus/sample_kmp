@@ -1,0 +1,23 @@
+query CarNewCarScreenQuery($accountId: ID!) {
+  me {
+    account(id: $accountId) {
+      label
+    }
+  }
+  carBrands {
+    nodes {
+      id
+      name
+      carModels {
+        id
+        name
+        carVersions {
+          id
+          name
+          usableBatteryCapacity
+          plugs
+        }
+      }
+    }
+  }
+}

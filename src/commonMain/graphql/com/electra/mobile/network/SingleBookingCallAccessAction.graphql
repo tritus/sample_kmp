@@ -1,0 +1,29 @@
+mutation CallAccessAction($input: CallAccessActionInput!) {
+  callAccessAction(input: $input) {
+    result {
+      ...callAccessResult
+    }
+    errors
+  }
+}
+
+fragment callAccessResult on AccessResult {
+  ... on AccessActionResult {
+    actionKey
+  }
+  ... on AccessPopupResult {
+    title
+    content
+    dismissActionKey
+    primaryActionButton {
+      key
+      label
+      confirmMessage
+    }
+    tertiaryActionButton {
+      key
+      label
+      confirmMessage
+    }
+  }
+}

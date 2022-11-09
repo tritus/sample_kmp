@@ -1,0 +1,37 @@
+query SettingsScreenQuery($accountId: ID!) {
+  me {
+    account(id: $accountId) {
+      cars {
+        nodes {
+          id
+          missingInfos
+        }
+      }
+      accountUser {
+        canListPayments
+        canCreateCar
+        canListCars
+        canDelete
+      }
+    }
+  }
+}
+
+query SettingsScreenFallbackQuery {
+  me {
+    fallbackAccount {
+      cars {
+        nodes {
+          id
+          missingInfos
+        }
+      }
+      accountUser {
+        canListPayments
+        canCreateCar
+        canListCars
+        canDelete
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+fragment car on Car {
+  id
+  friendlyIdentifier
+  friendlyName
+  missingInfos
+}

@@ -1,0 +1,17 @@
+mutation CreatePaymentMethod($input: CreatePaymentMethodInput!) {
+  createPaymentMethod(input: $input) {
+    paymentMethod {
+      id
+      ...PaymentMethodsPageScreen_PaymentMethodFragment
+    }
+    errors
+  }
+}
+
+fragment PaymentMethodsPageScreen_PaymentMethodFragment on PaymentMethod {
+  cardLast4Digits
+  cardScheme
+  cardExpiration
+  cardName
+  id
+}

@@ -1,0 +1,51 @@
+mutation CreateBookingIntent($input: CreateBookingIntentInput!) {
+  createBookingIntent(input: $input) {
+    bookingIntent {
+      ...bookingIntentFragment
+    }
+    errors
+  }
+}
+
+query BookingIntent($accountId: ID!, $bookingIntentId: ID!) {
+  me {
+    id
+    account(id: $accountId) {
+      id
+      bookingIntent(id: $bookingIntentId) {
+        ...bookingIntentFragment
+      }
+    }
+  }
+}
+
+fragment bookingIntentFragment on BookingIntent {
+  id
+  car {
+    ...car
+  }
+  choices {
+    id
+    available
+    rank
+    recommended
+    startingAt
+    spot {
+      id
+      publicLabel
+      reducedMobility
+    }
+    station {
+      ...station
+      publicAvailablePower
+      parkingTypeLabel
+    }
+    venueGeoDistance
+    venueRoadDistance
+    venueRoadDuration
+  }
+  pricingDetails {
+    label
+  }
+  promoCode
+}

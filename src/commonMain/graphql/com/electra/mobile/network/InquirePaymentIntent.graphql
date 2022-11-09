@@ -1,0 +1,12 @@
+mutation InquirePaymentIntent($input: InquirePaymentIntentInput!) {
+  inquirePaymentIntent(input: $input) {
+    needed
+    paymentIntent {
+      id
+      authorizationAmountCents
+      authorizationStatus
+      processoutInvoiceRef
+    }
+    errors
+  }
+}

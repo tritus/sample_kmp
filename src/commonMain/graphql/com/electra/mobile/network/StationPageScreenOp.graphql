@@ -1,0 +1,29 @@
+query StationPageScreenOp($accountId: ID!, $stationId: ID!) {
+  station(id: $stationId) {
+    ...station
+  }
+  me {
+    account(id: $accountId) {
+      accountUser {
+        canCreateCar
+        canListCars
+        canCreateSingleBooking
+      }
+    }
+  }
+}
+
+query StationPageScreenFallBackOp($stationId: ID!) {
+  station(id: $stationId) {
+    ...station
+  }
+  me {
+    fallbackAccount {
+      accountUser {
+        canCreateCar
+        canListCars
+        canCreateSingleBooking
+      }
+    }
+  }
+}

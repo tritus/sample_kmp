@@ -1,0 +1,25 @@
+query RemoteChargeQuery($remoteChargeId: ID!) {
+  remoteCharge(id: $remoteChargeId) {
+    ...RemoteChargeFragment
+  }
+}
+
+mutation ReportRemoteChargeAction($input: ReportRemoteChargeActionInput!) {
+  reportRemoteChargeAction(input: $input) {
+    remoteCharge {
+      ...RemoteChargeFragment
+    }
+    errors
+  }
+}
+
+mutation ChangeRemoteChargeObjective(
+  $input: ChangeRemoteChargeObjectiveInput!
+) {
+  changeRemoteChargeObjective(input: $input) {
+    remoteCharge {
+      ...RemoteChargeFragment
+    }
+    errors
+  }
+}

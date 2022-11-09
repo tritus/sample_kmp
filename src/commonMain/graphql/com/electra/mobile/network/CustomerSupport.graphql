@@ -1,0 +1,15 @@
+query CustomerSupportScreen {
+  supportSections {
+    label
+    children {
+      ...supportMethod
+    }
+  }
+}
+
+fragment supportMethod on SupportMethod {
+  type
+  label
+  subLabel
+  deeplink
+}

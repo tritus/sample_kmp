@@ -1,0 +1,13 @@
+mutation InquireInstantChargePaymentIntent(
+  $input: InquireInstantChargePaymentIntentInput!
+) {
+  inquireInstantChargePaymentIntent(input: $input) {
+    errors
+    needed
+    paymentIntent {
+      id
+      processoutInvoiceRef
+      authorizationAmountCents
+    }
+  }
+}

@@ -1,0 +1,27 @@
+mutation CapacityUsagePageConfirmCapacityUsage(
+  $input: ConfirmCapacityUsageInput!
+) {
+  confirmCapacityUsage(input: $input) {
+    connectorChoices {
+      id
+      plug
+      publicLabel
+    }
+    remoteCharge {
+      id
+    }
+    qrCodeAccepted
+    errors
+  }
+}
+
+mutation CapacityUsagePageConfirmCapacityUsageConnector(
+  $input: ConfirmCapacityUsageConnectorInput!
+) {
+  confirmCapacityUsageConnector(input: $input) {
+    remoteCharge {
+      id
+    }
+    errors
+  }
+}

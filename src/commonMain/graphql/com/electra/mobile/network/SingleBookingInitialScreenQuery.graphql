@@ -1,0 +1,104 @@
+query SingleBookingInitialScreenQuery($accountId: ID!, $singleBookingId: ID!) {
+  me {
+    id
+    account(id: $accountId) {
+      id
+      singleBooking(id: $singleBookingId) {
+        ...SingleBooking
+      }
+      singleBookings {
+        ...SingleBooking
+      }
+    }
+  }
+}
+
+fragment SingleBooking on SingleBooking {
+  id
+  startAt
+  canBeFinished
+  canBeCanceled
+  cancellationInfo
+  canResume
+  canDisplayAccess
+  canRetry
+  canExit
+  spot {
+    id
+    publicLabel
+    station {
+      id
+      name
+    }
+  }
+  station {
+    id
+    name
+    address
+    latitude
+    longitude
+    parkingTypeLabel
+    publicAvailablePower
+    comingSoonLabel
+  }
+  access {
+    ...accessFragment
+  }
+}
+
+fragment accessFragment on Access {
+  carEntryInitialStep {
+    destinationAddress
+    destinationLatitude
+    destinationLongitude
+    destinationName
+    primaryActionButton {
+      ...accessActionButtonFragment
+    }
+    title
+    subTitle
+  }
+  carEntryFinalStep {
+    title
+    manualContent
+    qrCodeContent
+  }
+  carEntrySteps {
+    ...accessStepFragment
+  }
+  carExitSteps {
+    ...accessStepFragment
+  }
+  accessKit {
+    ...accessStepFragment
+  }
+}
+
+fragment accessStepFragment on AccessStep {
+  title
+  primaryActionButton {
+    ...accessActionButtonFragment
+  }
+  accessKitTitle
+  genericImageKey
+  step
+  instructions {
+    label
+    subLabel
+  }
+  tertiaryActionButton {
+    ...accessActionButtonFragment
+  }
+  type
+}
+
+# Do not use fragments in the buttons here and in the fallback result. It makes a circular relation
+# and apollo cannot handle it.
+fragment accessActionButtonFragment on AccessActionButton {
+  key
+  label
+  confirmMessage
+  fallbackResult {
+    ...callAccessResult
+  }
+}

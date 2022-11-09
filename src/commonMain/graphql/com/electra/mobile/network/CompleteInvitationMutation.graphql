@@ -1,0 +1,13 @@
+mutation CompleteInvitation($input: CompleteInvitationInput!) {
+  completeInvitation(input: $input) {
+    account {
+      id
+      fallbackCar {
+        id
+      }
+    }
+    errors
+    successMessage
+    successTitle
+  }
+}

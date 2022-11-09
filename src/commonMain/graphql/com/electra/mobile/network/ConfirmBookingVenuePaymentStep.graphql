@@ -1,0 +1,10 @@
+mutation ConfirmBookingVenuePaymentStep(
+  $input: ConfirmBookingVenuePaymentStepInput!
+) {
+  confirmBookingVenuePaymentStep(input: $input) {
+    remoteCharge {
+      ...RemoteChargeFragment
+    }
+    errors
+  }
+}

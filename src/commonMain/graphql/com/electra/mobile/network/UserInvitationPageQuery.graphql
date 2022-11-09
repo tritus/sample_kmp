@@ -1,0 +1,16 @@
+query UserInvitationPage($invitationId: ID!) {
+  me {
+    id
+    invitation(id: $invitationId) {
+      id
+      ...UserInvitationPage_InvitationFragment
+    }
+  }
+}
+
+fragment UserInvitationPage_InvitationFragment on Invitation {
+  id
+  details
+  firstname
+  invitationText
+}

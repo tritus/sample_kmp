@@ -1,0 +1,26 @@
+query PaymentMethodListQuery($accountId: ID!) {
+  me {
+    id
+    account(id: $accountId) {
+      paymentMethodsNodes: paymentMethods {
+        paymentMethodsFragments: nodes {
+          ...PaymentMethodFragment
+        }
+      }
+    }
+  }
+}
+
+fragment PaymentMethodFragment on PaymentMethod {
+  id
+  cardExpiration
+  cardLast4Digits
+  cardScheme
+  processoutTokenRef
+  cardName
+  user {
+    id
+    firstname
+    lastname
+  }
+}

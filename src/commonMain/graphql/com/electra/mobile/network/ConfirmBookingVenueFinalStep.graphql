@@ -1,0 +1,17 @@
+mutation ConfirmBookingVenueFinalStep(
+  $input: ConfirmBookingVenueFinalStepInput!
+) {
+  confirmBookingVenueFinalStep(input: $input) {
+    paymentIntent {
+      id
+      authorizationAmountCents
+      authorizationStatus
+      processoutInvoiceRef
+    }
+    remoteCharge {
+      ...RemoteChargeFragment
+    }
+    qrCodeAccepted
+    errors
+  }
+}

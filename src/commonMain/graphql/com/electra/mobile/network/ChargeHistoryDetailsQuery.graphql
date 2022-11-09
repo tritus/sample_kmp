@@ -1,0 +1,49 @@
+query ChargePage($accountId: ID!, $chargeId: ID!) {
+  me {
+    id
+    account(id: $accountId) {
+      id
+      charge(id: $chargeId) {
+        ...ChargePageFragment
+      }
+    }
+  }
+}
+
+fragment ChargePageFragment on Charge {
+  id
+  canShowPricing
+  car {
+    id
+    carModel {
+      id
+    }
+    friendlyIdentifier
+    friendlyName
+    manualPlugs
+  }
+  date
+  details {
+    label
+    amountCents
+  }
+  invoice {
+    id
+    fileUrl
+  }
+  station {
+    ...station
+  }
+  taxes {
+    label
+    amountCents
+  }
+  totalAmountCents
+  totalDuration
+  totalEnergy
+  user {
+    id
+    firstname
+    lastname
+  }
+}

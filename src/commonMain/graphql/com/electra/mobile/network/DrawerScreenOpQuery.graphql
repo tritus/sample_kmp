@@ -1,0 +1,41 @@
+query DrawerScreenOpQuery($accountId: ID!) {
+  me {
+    id
+    account(id: $accountId) {
+      id
+      label
+      accountUser {
+        id
+        firstname
+        canListCars
+        canListPayments
+      }
+    }
+    accounts(first: 2) {
+      nodes {
+        id
+      }
+    }
+  }
+}
+
+query DrawerScreenFallbackOpQuery {
+  me {
+    id
+    fallbackAccount {
+      id
+      label
+      accountUser {
+        id
+        firstname
+        canListCars
+        canListPayments
+      }
+    }
+    accounts(first: 2) {
+      nodes {
+        id
+      }
+    }
+  }
+}

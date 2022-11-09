@@ -1,0 +1,5 @@
+mutation DismissExitSteps($input: DismissExitStepsInput!) {
+  dismissExitSteps(input: $input) {
+    errors
+  }
+}

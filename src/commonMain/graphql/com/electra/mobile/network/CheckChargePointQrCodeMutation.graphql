@@ -1,0 +1,7 @@
+mutation CheckChargePointQrCode($input: CheckChargePointQrCodeInput!) {
+  checkChargePointQrCode(input: $input) {
+    qrCodeAccepted
+    qrCode
+    errors
+  }
+}

@@ -1,0 +1,91 @@
+fragment RemoteChargeFragment on RemoteCharge {
+  id
+  cards {
+    action
+    actionLabel
+    deeplink
+    text
+    theme
+    title
+  }
+  pricingDetails {
+    label
+  }
+  singleBooking {
+    id
+    spot {
+      id
+      publicLabel
+    }
+    # currentRemoteCharge is fetched for cache purpose
+    currentRemoteCharge {
+      id
+    }
+    canBeCanceled
+    canBeFinished
+    canDisplayAccess
+    canExit
+    canResume
+    canRetry
+  }
+  capacityUsage {
+    id
+    canDisplayAccess
+    canExit
+  }
+  station {
+    id
+    parkingTypeLabel
+  }
+  charge {
+    id
+    canShowPricing
+  }
+  connector {
+    id
+    plug
+    publicLabel
+    spot {
+      id
+      publicLabel
+    }
+  }
+  step {
+    ... on RemoteChargeActionStep {
+      actionType
+      actionKey
+      actionLabel
+      actionConfirmMessage
+      message
+      subTitle
+      title
+    }
+    ... on RemoteChargeChargingStep {
+      actionKey
+      actionLabel
+      actionConfirmMessage
+      canShowPricing
+      currentPower
+      currentPriceCents
+      currentSoc
+      energyDelivered
+      targetSoc
+    }
+    ... on RemoteChargeCompletedStep {
+      details {
+        label
+        value
+      }
+      energyDelivered
+      message
+      priceCents
+      priceLabel
+      title
+      canShowPricing
+    }
+    ... on RemoteChargeWaitStep {
+      message
+      title
+    }
+  }
+}

@@ -1,0 +1,59 @@
+query SingleBookingAccessKitPage($accountId: ID!, $singleBookingId: ID!) {
+  me {
+    id
+    account(id: $accountId) {
+      id
+      singleBooking(id: $singleBookingId) {
+        id
+        access {
+          ...AccessKitPageAccess
+        }
+      }
+    }
+  }
+}
+
+query CapacityUsageAccessKitPage($accountId: ID!, $capacityUsageId: ID!) {
+  me {
+    id
+    account(id: $accountId) {
+      id
+      accountUser {
+        id
+        capacityUsage(id: $capacityUsageId) {
+          id
+          access {
+            ...AccessKitPageAccess
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment SingleBookingAccessKitPageFragment on SingleBooking {
+  id
+  access {
+    ...AccessKitPageAccess
+  }
+}
+
+fragment AccessKitPageAccess on Access {
+  accessKit {
+    step
+    genericImageKey
+    title
+    accessKitTitle
+    type
+    instructions {
+      label
+      subLabel
+    }
+    primaryActionButton {
+      ...accessActionButtonFragment
+    }
+    tertiaryActionButton {
+      ...accessActionButtonFragment
+    }
+  }
+}

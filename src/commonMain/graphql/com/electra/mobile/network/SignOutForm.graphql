@@ -1,0 +1,6 @@
+mutation SignOutForm($input: SignOutInput!) {
+  signOut(input: $input) {
+    signedOut
+    errors
+  }
+}

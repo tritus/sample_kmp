@@ -1,0 +1,9 @@
+query StationCarScreenOp($accountId: ID!, $carId: ID!) {
+  me {
+    account(id: $accountId) {
+      car(id: $carId) {
+        ...car
+      }
+    }
+  }
+}

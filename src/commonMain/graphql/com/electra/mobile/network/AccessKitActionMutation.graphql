@@ -1,0 +1,16 @@
+mutation AccessKitActionMutation(
+  $callAccessStationInput: CallAccessActionInput!
+) {
+  callAccessAction(input: $callAccessStationInput) {
+    singleBooking {
+      id
+      access {
+        ...AccessKitPageAccess
+      }
+    }
+    result {
+      ...callAccessResult
+    }
+    errors
+  }
+}

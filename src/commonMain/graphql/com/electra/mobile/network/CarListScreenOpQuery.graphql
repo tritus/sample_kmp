@@ -1,0 +1,14 @@
+query CarListScreenOpQuery($accountId: ID!) {
+  me {
+    account(id: $accountId) {
+      carsNodes: cars {
+        carsFragments: nodes {
+          ...car
+        }
+      }
+      accountUser {
+        canCreateCar
+      }
+    }
+  }
+}
