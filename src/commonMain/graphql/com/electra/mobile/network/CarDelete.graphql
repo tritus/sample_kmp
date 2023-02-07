@@ -1,5 +1,0 @@
-mutation DeleteCar($input: DeleteCarInput!) {
-  deleteCar(input: $input) {
-    errors
-  }
-}

@@ -6,4 +6,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "electra-app-mobile"
+include(":common")
+
+rootProject.name = "sample-kmp"

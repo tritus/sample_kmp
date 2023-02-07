@@ -1,8 +1,0 @@
-fragment CardFragment on Card {
-  action
-  actionLabel
-  deeplink
-  text
-  theme
-  title
-}

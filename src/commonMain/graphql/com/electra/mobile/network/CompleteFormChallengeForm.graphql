@@ -1,7 +1,0 @@
-mutation CompletePhoneChallengeForm($input: CompletePhoneChallengeInput!) {
-  completePhoneChallenge(input: $input) {
-    clientMutationId
-    completionToken
-    errors
-  }
-}

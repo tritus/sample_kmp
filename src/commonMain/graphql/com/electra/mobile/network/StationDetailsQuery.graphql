@@ -1,7 +1,0 @@
-query StationDetailsQuery($qrCode: String!) {
-  chargePoint(publicCode: $qrCode) {
-    station {
-      id
-    }
-  }
-}

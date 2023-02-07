@@ -1,7 +1,0 @@
-query MapScreenOp {
-  stationsContainer: stations(first: 100) {
-    nodes {
-      ...station
-    }
-  }
-}

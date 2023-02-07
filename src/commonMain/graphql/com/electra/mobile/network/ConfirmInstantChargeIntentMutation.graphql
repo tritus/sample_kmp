@@ -1,8 +1,0 @@
-mutation ConfirmInstantChargeIntent($input: ConfirmInstantChargeIntentInput!) {
-  confirmInstantChargeIntent(input: $input) {
-    errors
-    remoteCharge {
-      id
-    }
-  }
-}

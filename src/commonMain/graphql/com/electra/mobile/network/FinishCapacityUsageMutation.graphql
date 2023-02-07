@@ -1,5 +1,0 @@
-mutation FinishCapacityUsage($input: FinishCapacityUsageInput!) {
-  finishCapacityUsage(input: $input) {
-    errors
-  }
-}

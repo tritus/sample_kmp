@@ -1,5 +1,0 @@
-mutation DeletePaymentMethod($input: DeletePaymentMethodInput!) {
-  deletePaymentMethod(input: $input) {
-    errors
-  }
-}

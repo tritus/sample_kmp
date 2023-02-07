@@ -1,5 +1,0 @@
-mutation CreateReviewMutation($input: CreateReviewInput!) {
-  createReview(input: $input) {
-    errors
-  }
-}

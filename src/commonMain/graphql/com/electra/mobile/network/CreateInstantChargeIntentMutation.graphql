@@ -1,8 +1,0 @@
-mutation CreateInstantChargeIntent($input: CreateInstantChargeIntentInput!) {
-  createInstantChargeIntent(input: $input) {
-    errors
-    instantChargeIntent {
-      id
-    }
-  }
-}

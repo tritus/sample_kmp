@@ -1,8 +1,0 @@
-mutation UpdateCarMutation($input: UpdateCarInput!) {
-  updateCar(input: $input) {
-    car {
-      id
-    }
-    errors
-  }
-}
