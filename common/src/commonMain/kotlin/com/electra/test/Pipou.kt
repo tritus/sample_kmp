@@ -14,6 +14,10 @@ class SecondViewModel(
     fun onCLick() {
         navController.push(NavLink.THIRD)
     }
+
+    fun onGoBackClicked() {
+        navController.pop()
+    }
 }
 
 class ThirdViewModel(
@@ -37,4 +41,5 @@ object AppConstants {
 interface NavController {
     fun push(navLink: NavLink)
     fun popTo(navLink: NavLink)
+    fun pop()
 }

@@ -8,6 +8,8 @@ struct iosAppApp: App {
             NavigationView(
                 content: {
                     ElectraView(
+                        parentPopTo: {_ in},
+                        currentNavLink: AppConstants.shared.rootScreen,
                         content: { navController in
                             destinationFor(AppConstants.shared.rootScreen, navController: navController)
                         }
@@ -22,12 +24,21 @@ struct ElectraView: View {
     @State var destination: NavLink? = nil
     @Environment(\.presentationMode) var presentationMode
 
+    let parentPopTo: (NavLink) -> Void
+    let currentNavLink: NavLink
     let content: (NavController) -> AnyView
 
     var body: some View {
         let navController = IOSNavController(
             onPush: { dest in destination = dest },
-            onPopTo: { _ in presentationMode.wrappedValue.dismiss() }
+            onPopTo: { dest in
+                if (currentNavLink == dest) {
+                    destination = nil
+                } else {
+                    parentPopTo(dest)
+                }
+            },
+            onPop: { presentationMode.wrappedValue.dismiss() }
         )
         VStack {
             content(navController)
@@ -40,6 +51,8 @@ struct ElectraView: View {
                 destination: {
                     if let dest = destination {
                         ElectraView(
+                            parentPopTo: { navController.popTo(navLink: $0) },
+                            currentNavLink: dest,
                             content: { childNavController in
                                 destinationFor(dest, navController: childNavController)
                             }
@@ -84,6 +97,7 @@ struct SecondScreen: View {
                 .foregroundColor(.accentColor)
             Text("2!")
             Button("Click me to go to 3!", action: { viewmodel.onCLick() })
+            Button("Click me to go back", action: { viewmodel.onGoBackClicked() })
         }
         .padding()
     }
@@ -111,10 +125,16 @@ struct ThirdScreen: View {
 class IOSNavController: NavController {
     let onPush: (NavLink) -> Void
     let onPopTo: (NavLink) -> Void
+    let onPop: () -> Void
     
-    init(onPush: @escaping (NavLink) -> Void, onPopTo: @escaping (NavLink) -> Void) {
+    init(
+        onPush: @escaping (NavLink) -> Void,
+        onPopTo: @escaping (NavLink) -> Void,
+        onPop: @escaping () -> Void
+    ) {
         self.onPush = onPush
         self.onPopTo = onPopTo
+        self.onPop = onPop
     }
     
     func popTo(navLink: NavLink) {
@@ -123,6 +143,10 @@ class IOSNavController: NavController {
     
     func push(navLink: NavLink) {
         onPush(navLink)
+    }
+    
+    func pop() {
+        onPop()
     }
 }
 
