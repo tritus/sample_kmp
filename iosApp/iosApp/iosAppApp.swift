@@ -7,9 +7,11 @@ struct iosAppApp: App {
         WindowGroup {
             NavigationView(
                 content: {
-                    ElectraView { navController in
-                        destinationFor(AppConstants.shared.rootScreen, navController: navController)
-                    }
+                    ElectraView(
+                        content: { navController in
+                            destinationFor(AppConstants.shared.rootScreen, navController: navController)
+                        }
+                    )
                 }
             )
         }
@@ -17,24 +19,32 @@ struct iosAppApp: App {
 }
 
 struct ElectraView: View {
-    let content: (NavController) -> AnyView
     @State var destination: NavLink? = nil
+    @Environment(\.presentationMode) var presentationMode
+
+    let content: (NavController) -> AnyView
+
     var body: some View {
-        let navController = IOSNavController(onPush: { destination = $0 }, onPopTo: { _ in })
+        let navController = IOSNavController(
+            onPush: { dest in destination = dest },
+            onPopTo: { _ in presentationMode.wrappedValue.dismiss() }
+        )
         VStack {
             content(navController)
             NavigationLink(
                 "",
                 isActive: .init(
                     get: { destination != nil },
-                    set: { if !$0 { destination = nil } }
+                    set: { _ in destination = nil }
                 ),
                 destination: {
-                    ElectraView(
-                        content: { childNavController in
-                            destinationFor(destination!, navController: childNavController)
-                        }
-                    )
+                    if let dest = destination {
+                        ElectraView(
+                            content: { childNavController in
+                                destinationFor(dest, navController: childNavController)
+                            }
+                        )
+                    }
                 }
             )
         }
