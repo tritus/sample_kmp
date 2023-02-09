@@ -1,10 +1,3 @@
-//
-//  iosAppApp.swift
-//  iosApp
-//
-//  Created by Tristan Ferré on 07/02/2023.
-//
-
 import SwiftUI
 import common
 
@@ -12,38 +5,39 @@ import common
 struct iosAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ElectraNavigationView(
-                content: { navController in
-                    AnyView(FirstScreen(navController: navController))
+            NavigationView(
+                content: {
+                    ElectraView { navController in
+                        destinationFor(AppConstants.shared.rootScreen, navController: navController)
+                    }
                 }
             )
         }
     }
 }
 
-struct ElectraNavigationView: View {
+struct ElectraView: View {
     let content: (NavController) -> AnyView
     @State var destination: NavLink? = nil
     var body: some View {
-        NavigationView(
-            content: {
-                let navController = IOSNavController(onPush: { destination = $0 }, onPop: { _ in})
-                content(navController)
-                if let navLink = destination {
-                    NavigationLink(
-                        "",
-                        isActive: .init(get: { destination != nil }, set: { _ in }),
-                        destination: {
-                            ElectraNavigationView(
-                                content: { childNavController in
-                                    destinationFor(navLink, navController: childNavController)
-                                }
-                            )
+        let navController = IOSNavController(onPush: { destination = $0 }, onPopTo: { _ in })
+        VStack {
+            content(navController)
+            NavigationLink(
+                "",
+                isActive: .init(
+                    get: { destination != nil },
+                    set: { if !$0 { destination = nil } }
+                ),
+                destination: {
+                    ElectraView(
+                        content: { childNavController in
+                            destinationFor(destination!, navController: childNavController)
                         }
                     )
                 }
-            }
-        )
+            )
+        }
     }
 }
 
@@ -106,15 +100,15 @@ struct ThirdScreen: View {
 
 class IOSNavController: NavController {
     let onPush: (NavLink) -> Void
-    let onPop: (NavLink) -> Void
+    let onPopTo: (NavLink) -> Void
     
-    init(onPush: @escaping (NavLink) -> Void, onPop: @escaping (NavLink) -> Void) {
+    init(onPush: @escaping (NavLink) -> Void, onPopTo: @escaping (NavLink) -> Void) {
         self.onPush = onPush
-        self.onPop = onPop
+        self.onPopTo = onPopTo
     }
     
     func popTo(navLink: NavLink) {
-        onPop(navLink)
+        onPopTo(navLink)
     }
     
     func push(navLink: NavLink) {
@@ -127,7 +121,7 @@ func destinationFor(_ navLink: NavLink, navController: NavController) -> AnyView
     switch navLink {
     case NavLink.first: destination = FirstScreen(navController: navController)
     case NavLink.second: destination = SecondScreen(navController: navController)
-    case NavLink.third: destination =  ThirdScreen(navController: navController)
+    case NavLink.third: destination = ThirdScreen(navController: navController)
     default: fatalError("navlink unknown")
     }
     return AnyView(destination)
