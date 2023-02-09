@@ -40,27 +40,38 @@ struct ElectraView: View {
             },
             onPop: { presentationMode.wrappedValue.dismiss() }
         )
-        VStack {
-            content(navController)
-            NavigationLink(
-                "",
-                isActive: .init(
-                    get: { destination != nil },
-                    set: { _ in destination = nil }
-                ),
-                destination: {
-                    if let dest = destination {
-                        ElectraView(
-                            parentPopTo: { navController.popTo(navLink: $0) },
-                            currentNavLink: dest,
-                            content: { childNavController in
-                                destinationFor(dest, navController: childNavController)
-                            }
-                        )
+        return VStack(
+            content: {
+                content(navController)
+                NavigationLink(
+                    "",
+                    isActive: .init(
+                        get: { destination != nil },
+                        set: { _ in destination = nil }
+                    ),
+                    destination: {
+                        if let dest = destination {
+                            ElectraView(
+                                parentPopTo: { navController.popTo(navLink: $0) },
+                                currentNavLink: dest,
+                                content: { childNavController in
+                                    destinationFor(dest, navController: childNavController)
+                                }
+                            )
+                        }
                     }
-                }
-            )
-        }
+                )
+            }
+        ).fullScreenCover(
+            item: .init(
+                get: { 1 },
+                set: {_ in}
+            ),
+            onDismiss: {},
+            content: {
+         
+            }
+        )
     }
 }
 
