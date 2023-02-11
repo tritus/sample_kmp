@@ -5,23 +5,22 @@ import common
 struct iosAppApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView(
-                content: {
-                    ElectraView(
-                        parentPopTo: {_ in},
-                        currentNavLink: AppConstants.shared.rootScreen,
-                        content: { navController in
-                            destinationFor(AppConstants.shared.rootScreen, navController: navController)
-                        }
-                    )
-                }
-            )
+            NavigationView {
+                ElectraView(
+                    parentPopTo: {_ in},
+                    currentNavLink: AppConstants.shared.rootScreen,
+                    content: { navController in
+                        destinationFor(AppConstants.shared.rootScreen, navController: navController)
+                    }
+                )
+            }
         }
     }
 }
 
 struct ElectraView: View {
-    @State var destination: NavLink? = nil
+    @State var pushDestination: NavLink? = nil
+    @State var modalDestination: NavLink? = nil
     @Environment(\.presentationMode) var presentationMode
 
     let parentPopTo: (NavLink) -> Void
@@ -29,50 +28,65 @@ struct ElectraView: View {
     let content: (NavController) -> AnyView
 
     var body: some View {
-        let navController = IOSNavController(
-            onPush: { dest in destination = dest },
+        VStack {
+            content(getANavController())
+            NavigationLink(
+                "",
+                isActive: .init(
+                    get: { pushDestination != nil },
+                    set: { _ in pushDestination = nil }
+                ),
+                destination: {
+                    if let dest = pushDestination {
+                        ElectraView(
+                            parentPopTo: { getANavController().popTo(navLink: $0) },
+                            currentNavLink: dest,
+                            content: { childNavController in
+                                destinationFor(dest, navController: childNavController)
+                            }
+                        )
+                    }
+                }
+            )
+        }
+        .fullScreenCover(
+            isPresented: .init(
+                get: { modalDestination != nil },
+                set: { _ in modalDestination = nil }
+            ),
+            onDismiss: {},
+            content: {
+                if let dest = modalDestination {
+                    NavigationView {
+                        ElectraView(
+                            parentPopTo: { getANavController().popTo(navLink: $0) },
+                            currentNavLink: dest,
+                            content: { childNavController in
+                                destinationFor(dest, navController: childNavController)
+                            }
+                        )
+                    }
+                }
+            }
+        )
+    }
+    
+    func getANavController() -> NavController {
+        return IOSNavController(
+            onPush: { dest in pushDestination = dest },
+            onPushModaly: { dest in modalDestination = dest },
             onPopTo: { dest in
                 if (currentNavLink == dest) {
-                    destination = nil
+                    pushDestination = nil
+                    modalDestination = nil
                 } else {
                     parentPopTo(dest)
                 }
             },
             onPop: { presentationMode.wrappedValue.dismiss() }
         )
-        return VStack(
-            content: {
-                content(navController)
-                NavigationLink(
-                    "",
-                    isActive: .init(
-                        get: { destination != nil },
-                        set: { _ in destination = nil }
-                    ),
-                    destination: {
-                        if let dest = destination {
-                            ElectraView(
-                                parentPopTo: { navController.popTo(navLink: $0) },
-                                currentNavLink: dest,
-                                content: { childNavController in
-                                    destinationFor(dest, navController: childNavController)
-                                }
-                            )
-                        }
-                    }
-                )
-            }
-        ).fullScreenCover(
-            item: .init(
-                get: { 1 },
-                set: {_ in}
-            ),
-            onDismiss: {},
-            content: {
-         
-            }
-        )
     }
+    
 }
 
 struct FirstScreen: View {
@@ -89,6 +103,7 @@ struct FirstScreen: View {
                 .foregroundColor(.accentColor)
             Text("1!")
             Button("Click me to go to 2!", action: { viewmodel.onCLick() })
+            Button("Click me to go to 2 modally!", action: { viewmodel.onOpenSecondWithModalClicked() })
         }
         .padding()
     }
@@ -135,15 +150,18 @@ struct ThirdScreen: View {
 
 class IOSNavController: NavController {
     let onPush: (NavLink) -> Void
+    let onPushModaly: (NavLink) -> Void
     let onPopTo: (NavLink) -> Void
     let onPop: () -> Void
     
     init(
         onPush: @escaping (NavLink) -> Void,
+        onPushModaly: @escaping (NavLink) -> Void,
         onPopTo: @escaping (NavLink) -> Void,
         onPop: @escaping () -> Void
     ) {
         self.onPush = onPush
+        self.onPushModaly = onPushModaly
         self.onPopTo = onPopTo
         self.onPop = onPop
     }
@@ -158,6 +176,10 @@ class IOSNavController: NavController {
     
     func pop() {
         onPop()
+    }
+    
+    func pushModaly(navLink: NavLink) {
+        onPushModaly(navLink)
     }
 }
 

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		22BAB51D2992F79E009F6CCA /* iosAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BAB51C2992F79E009F6CCA /* iosAppApp.swift */; };
-		22BAB51F2992F79E009F6CCA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BAB51E2992F79E009F6CCA /* ContentView.swift */; };
 		22BAB5212992F7A0009F6CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BAB5202992F7A0009F6CCA /* Assets.xcassets */; };
 		22BAB5242992F7A0009F6CCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BAB5232992F7A0009F6CCA /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +15,6 @@
 /* Begin PBXFileReference section */
 		22BAB5192992F79E009F6CCA /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BAB51C2992F79E009F6CCA /* iosAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppApp.swift; sourceTree = "<group>"; };
-		22BAB51E2992F79E009F6CCA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		22BAB5202992F7A0009F6CCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22BAB5232992F7A0009F6CCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,7 +50,6 @@
 			isa = PBXGroup;
 			children = (
 				22BAB51C2992F79E009F6CCA /* iosAppApp.swift */,
-				22BAB51E2992F79E009F6CCA /* ContentView.swift */,
 				22BAB5202992F7A0009F6CCA /* Assets.xcassets */,
 				22BAB5222992F7A0009F6CCA /* Preview Content */,
 			);
@@ -158,7 +155,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BAB51F2992F79E009F6CCA /* ContentView.swift in Sources */,
 				22BAB51D2992F79E009F6CCA /* iosAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

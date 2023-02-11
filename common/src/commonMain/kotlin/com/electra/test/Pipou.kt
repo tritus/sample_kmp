@@ -6,6 +6,10 @@ class FirstViewModel(
     fun onCLick() {
         navController.push(NavLink.SECOND)
     }
+
+    fun onOpenSecondWithModalClicked() {
+        navController.pushModaly(NavLink.SECOND)
+    }
 }
 
 class SecondViewModel(
@@ -42,4 +46,5 @@ interface NavController {
     fun push(navLink: NavLink)
     fun popTo(navLink: NavLink)
     fun pop()
+    fun pushModaly(navLink: NavLink)
 }
