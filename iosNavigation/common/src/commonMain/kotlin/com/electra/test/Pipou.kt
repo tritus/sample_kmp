@@ -1,14 +1,26 @@
 package com.electra.test
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+
 class FirstViewModel(
     private val navController: NavController
 ) {
+    val _state = MutableStateFlow(0)
+    val state: StateFlow<Int>
+        get() = _state
+
     fun onCLick() {
         navController.push(NavLink.SECOND)
     }
 
     fun onOpenSecondWithModalClicked() {
         navController.pushModaly(NavLink.SECOND)
+    }
+
+    fun onIncrementClicked() {
+        _state.update { it + 1 }
     }
 }
 

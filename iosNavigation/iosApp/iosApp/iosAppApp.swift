@@ -97,15 +97,19 @@ struct FirstScreen: View {
     }
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("1!")
-            Button("Click me to go to 2!", action: { viewmodel.onCLick() })
-            Button("Click me to go to 2 modally!", action: { viewmodel.onOpenSecondWithModalClicked() })
+        ObservingView(viewmodel.state) { state in
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text("1!")
+                Text("Increment: \(state)")
+                Button("Click me to go to 2!", action: { viewmodel.onCLick() })
+                Button("Click me to go to 2 modally!", action: { viewmodel.onOpenSecondWithModalClicked() })
+                Button("Click me to increment", action: { viewmodel.onIncrementClicked() })
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
@@ -193,3 +197,78 @@ func destinationFor(_ navLink: NavLink, navController: NavController) -> AnyView
     }
     return AnyView(destination)
 }
+
+struct ObservingView<ViewState>: View {
+    let content: (ViewState) -> any View
+    private let stateFlow: Kotlinx_coroutines_coreStateFlow
+    @State var state: ViewState
+    
+    init(stateFlow: Kotlinx_coroutines_coreStateFlow, content: @escaping (ViewState) -> any View) {
+        self.content = content
+        self.stateFlow = stateFlow
+    }
+    
+    var body: some View {
+        AnyView(content(state))
+            .task {
+                for await newState: ViewState in stateFlow.toAsyncSequence() {
+                    state = newState
+                }
+            }
+    }
+    
+    private func onViewDisappeared() {
+        
+    }
+}
+
+extension Kotlinx_coroutines_coreStateFlow {
+    func toAsyncSequence<Element>() -> StateFlowAsSequence<Element> {
+        
+    }
+}
+
+class StateFlowAsSequence<Data>: AsyncSequence {
+    typealias AsyncIterator = StateFlowAsSequenceIterator<Data>
+    typealias Element = Data
+    
+    private let stateFlow: Kotlinx_coroutines_coreStateFlow
+    
+    init(stateFlow: Kotlinx_coroutines_coreStateFlow) {
+        self.stateFlow = stateFlow
+    }
+    
+    func makeAsyncIterator() -> StateFlowAsSequenceIterator<Data> {
+        StateFlowAsSequenceIterator(stateFlow: stateFlow)
+    }
+}
+
+class StateFlowAsSequenceIterator<DataType>: AsyncIteratorProtocol {
+    private let stateFlow: Kotlinx_coroutines_coreStateFlow
+    
+    init(stateFlow: Kotlinx_coroutines_coreStateFlow) {
+        self.stateFlow = stateFlow
+    }
+    
+    func next() async throws -> DataType? {
+        var nextValue: DataType? = nil
+        let takeNext = Task {
+            try await stateFlow.collect(collector: FlowCollector { nextValue = $0 })
+        }
+        try await takeNext.value
+        return nextValue!
+    }
+}
+
+class FlowCollector<Data>: Kotlinx_coroutines_coreFlowCollector {
+    let onEach: (Data) -> Void
+    
+    init(onEach: @escaping (Data) -> Void) {
+        self.onEach = onEach
+    }
+
+    func emit(value: Any?) async throws {
+        onEach(value as! Data)
+    }
+}
+
